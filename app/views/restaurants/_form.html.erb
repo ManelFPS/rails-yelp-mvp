@@ -1,0 +1,17 @@
+<%= simple_form_for restaurant do |f| %>
+  <%= f.input :name %>
+  <%= f.input :address %>
+  <%= f.input :phone_number %>
+  <%= f.input :category do %>
+  <%= f.select :category,
+    options_for_select(
+      [["Select a category", "", { disabled: true, selected: restaurant.category.blank?, hidden: true }]] +
+      Restaurant::CATEGORIES.map { |category| [category.capitalize, category] },
+      restaurant.category
+    ),
+    {},
+    class: "form-select"%>
+  <% end %>
+
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>

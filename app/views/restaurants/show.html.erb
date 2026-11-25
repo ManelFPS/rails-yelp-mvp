@@ -1,0 +1,31 @@
+<div class="container py-4">
+  <%= link_to "← Back to restaurants", restaurants_path, class: "text-decoration-none" %>
+
+  <div class="my-4">
+    <h1><%= @restaurant.name %></h1>
+
+    <p><strong>Category:</strong> <%= @restaurant.category.capitalize %></p>
+    <p><strong>Address:</strong> <%= @restaurant.address %></p>
+    <p><strong>Phone:</strong> <%= @restaurant.phone_number %></p>
+  </div>
+
+  <hr>
+
+  <div class="mt-4">
+    <h2 class="mb-3">Leave a review</h2>
+    <%= render "reviews/form" %>
+  </div>
+
+  <% if @restaurant.reviews.any? %>
+    <% @restaurant.reviews.each do |review| %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Rating: <%= review.rating %>/5</h5>
+          <p class="card-text"><%= review.content %></p>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No reviews yet. Be the first to leave one!</p>
+  <% end %>
+</div>
